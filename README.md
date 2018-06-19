@@ -1,2 +1,1 @@
-# STT-Terpadu-Nurul-Fikri
-# Program Studi Teknik Informatika S1
+# Program Studi S1 Teknik Informatika
