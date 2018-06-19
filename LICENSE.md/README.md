@@ -1,1 +1,0 @@
-# STT-Terpadu-Nurul-Fikri
