@@ -1,0 +1,270 @@
+/* Animation */
+.animation{
+  width: 50px;
+  height: 50px;
+  border-radius: 100px;
+  background-color: red;
+  position: relative;
+  animation-name: bola; /* Animasi */
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+}
+
+/* Standard syntax */
+@keyframes bola {
+  0%   {background-color:red; left:0px; top:50px;}
+  50%  {background-color:yellow; left:1150px; top:50px;}
+  100%  {background-color:green; left:0px; top:50px; right:1150px;}
+}
+
+#animation1{
+  float: left;
+  background-position: center;
+}
+
+/* Header */
+#header{  
+  background-color: #c7dbf9; /* background-color */  
+  text-align: center; /* textalign */  
+  text-shadow: 1px 1px 2px #082b34;
+  font-family: Rouge Script, cursive;
+  font-size: 25px; /* fontsize */
+  color: red;
+  border: 3px solid black; /* border */
+  border-radius: 12px;  
+  line-height: 30px; /* lineheight */
+  margin: 10px; /* margin */ 
+  padding: 10px; /* padding */
+}
+
+#header h1{
+  clear: left;
+}
+
+#header p{
+  font-family: Rouge Script, cursive;
+  font-style: italic; /* fontstyle */
+  font-size: 25px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #082b34;
+  color: purple;
+  background-color: #c7dbf9;
+  margin-bottom: 10px;
+}
+
+/* Navigasi Menu */
+#navigasi{
+  position: -webkit-sticky; /* position */
+  position: sticky;  
+  top: 0;
+  padding: 5px;
+  background-color: #cae8ca;
+  border: 2px solid rgb(0, 0, 0);
+}
+
+#navigasi ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(136, 178, 233);
+}
+
+#navigasi li {
+    float: left; /* float */
+}
+
+#navigasi li a {
+    display: block; /* display */
+    color: red;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none; /* textdecoration */  
+    font-weight: bold; /* fontweight */
+}
+
+#navigasi li a:hover {
+    background-color: rgb(221, 178, 231);
+}
+
+#navigasi .active {
+    background-color: rgb(221, 178, 231);
+}
+
+/* Gambar Perusahaan */
+#gambar{
+  width: 100%;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Promosi */
+#promosi{
+  padding: 5px;
+  border: 3px solid black;
+  border-radius: 12px;
+  background-image: url("../image/background.png"); /* background-image */  
+  background-position: center;
+}
+
+#promosi table{
+  width: 100%;
+  height: auto;
+  border-spacing: 20px;
+}
+
+#promosi td{
+  width: 33.3%;
+  height: auto;
+  text-align: center;
+  border: 3px solid black;
+  border-radius: 15px;
+  background-color: #c7dbf9;
+	-webkit-transition: all .9s;
+	-moz-transition: all .9s;
+	-o-transition: all .9s;
+	-ms-transition: all .9s;
+	transition: all .9s; /* Transisi */
+}
+
+#promosi td:hover{
+	background: #FE980F;
+	border-bottom: 1px solid #FFF;
+}
+
+#promosi caption{
+  color: red;
+  font-family: Rouge Script, cursive;
+  font-size: 50px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #082b34;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+#promosi p{
+  color: red;
+  font-family: Rouge Script, cursive;
+  font-size: 30px;
+  text-align: center;
+  text-shadow: 1px 1px 2px #082b34;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+#promosi span{
+  color: purple;
+  font-family: Rouge Script, cursive;
+  font-size: 20px;
+  text-shadow: 1px 1px 2px #082b34;
+  padding: 5px;
+}
+
+/* Cabang */
+#cabang {
+  margin-top: 10px;
+}
+
+#cabang table{
+  padding: 10px;
+  width: 100%;
+  height: auto;
+  border-spacing: 15px;
+}
+
+#cabang td{
+  padding: 10px;
+  border: 3px solid black;
+  border-radius: 12px;
+  width: 33.3%;
+  text-align: center;
+  background-color: #c7dbf9;
+}
+
+#cabang img{
+  outline-style: outset;
+  margin-top: 10px;
+  width: 70%;
+  height: auto;
+  border: 3px solid black;
+  text-align: center;
+}
+
+#cabang span{
+  color: red;
+  font-family: Rouge Script, cursive;
+  font-size: 20px;
+  text-align: justify;
+  font-weight: bold;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+#cabang p{
+  color: purple;
+  font-family: Rouge Script, cursive;
+  font-size: 15px;
+  text-align: justify;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+/* Tentang */
+#tentang{
+  border: 3px solid black;
+  border-radius: 12px;
+  padding: 50px;
+  background-color: #c7dbf9;
+}
+
+#tentang h2{
+  color: red;
+  font-family: Rouge Script, cursive;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#tentang p{
+  color: purple;
+  font-family: Rouge Script, cursive;
+  font-size: 15px;
+  text-align: justify;
+}
+
+/* Kontak */
+#kontak{
+  border: 3px solid black;
+  border-radius: 12px;
+  padding: 50px;
+  margin-top: 10px;
+  background-color: #c7dbf9;
+}
+
+#kontak h2{
+  color: red;
+  font-family: Rouge Script, cursive;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+#kontak p{
+  color: purple;
+  font-family: Rouge Script, cursive;
+  font-size: 15px;
+  text-align: justify;
+}
+
+/* Footer */
+#footer{
+  max-width: 100%;
+  text-align: center;
+  font-size: 13;
+}
+
+#footer p{
+  color: black;
+  font-family: Rouge Script, cursive;
+  font-size: 15px;
+  text-align: center;
+}
