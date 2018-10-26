@@ -1,0 +1,86 @@
+<html>
+    <head>
+        <link rel="shortcut icon" href="image/logos.png">
+        <link rel="stylesheet" type="text/css" href="css/form.css">
+        <script language="javascript" src="js/otentikasi.js"></script>
+        <title>TourlevarT</title>
+    </head>
+    <body>   
+        <h1>TourlevarT Form Validation</h1>
+        <form id="data-pelanggan">            
+            <div id="fvalid">
+                <b>Nama Pelanggan : </b>
+                <span id="vnama"></span>
+                <br>
+                <input type="text" placeholder="Contoh : Muhammad Azhar Rasyad" id="nama">
+
+                <b>Email : </b>
+                <span id="vemail"></span>
+                <br>
+                <input type="text" placeholder="Contoh : muhazharrasyad@gmail.com" id="email">
+
+                <b>Jam Keberangkatan : </b>
+                <span id="vjam"></span>
+                <br>
+                <input type="time" id="jam">
+
+                <b>Tujuan Keberangkatan : </b>
+                <span id="vtujuan"></span>
+                <br>
+                <input type="text" placeholder="Contoh : DKI Jakarta" id="tujuan">
+
+                <b>Jumlah Tiket : </b>
+                <span id="vtiket"></span>
+                <br>
+                <input type="number" placeholder="Contoh : 5" id="tiket">
+
+                <br>
+                <input type="submit" value="Submit" onclick="return submitform()">  
+
+                <a href="index.html">
+                    <input type="button" id="batal" value="Batal">
+                </a>
+            </div>              
+
+            <div id="fhasil" style="display: none">
+                <table>
+                    <caption><h1>Data Pelanggan</h1></caption>
+                    <tr>                        
+                        <td class="td1"><b>Nama Pelanggan</b></td>
+                        <td class="td2"><b>:</b></td>
+                        <td><span class="hasil" id="hnama"></span></td>
+                    </tr>
+                    <tr>                        
+                        <td><b>Email</b></td>
+                        <td><b>:</b></td>
+                        <td><span class="hasil" id="hemail"></span></td>
+                    </tr>
+                    <tr>                        
+                        <td><b>Jam Keberangkatan</b></td>
+                        <td><b>:</b></td>
+                        <td><span class="hasil" id="hjam"></span></td>
+                    </tr>
+                    <tr>                        
+                        <td><b>Tujuan Keberangkatan</b></td>
+                        <td><b>:</b></td>
+                        <td><span class="hasil" id="htujuan"></span></td>
+                    </tr>
+                    <tr>                        
+                        <td><b>Jumlah Tiket</b></td>
+                        <td><b>:</b></td>
+                        <td><span class="hasil" id="htiket"></span></td>
+                    </tr>
+                </table>       
+            </div> 
+        </form> 
+
+        <script>
+            var form = document.getElementById("data-pelanggan");
+            form.onsubmit = function(e)
+            {
+                e.preventDefault();                               
+                this.reset();
+            };
+        </script>
+    </body>
+</html>
