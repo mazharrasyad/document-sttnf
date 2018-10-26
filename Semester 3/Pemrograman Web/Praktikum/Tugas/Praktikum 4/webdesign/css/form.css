@@ -1,0 +1,143 @@
+h1{       
+    text-align: center;
+    text-shadow: 1px 1px 2px #082b34;
+    font-family: Rouge Script, cursive;
+    font-size: 50px;
+    color: red;
+}
+
+b{
+    font-family: Rouge Script, cursive;
+    font-size: 25px;
+    color: purple;
+}
+
+#flogin{
+    padding: 20px;
+    background-color: #c7dbf9;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+#flogin input[type=text], input[type=password] {
+    width: 100%;
+    padding: 10px;
+    display: inline-block;
+    border: 2px solid #ccc;
+    box-sizing: border-box; 
+    margin-top: 10px;
+    margin-bottom: 10px;    
+}
+
+input[type=button]{
+    background-color: #FE980F;
+    padding: 14px 20px;
+    width: 100%;    
+    margin-top: 10px;
+    margin-bottom: 10px;    
+    text-align: center;
+    color: white;
+}
+
+#batal{
+    background-color: rgb(221, 178, 231);
+    color: red;    
+}
+
+a{
+    text-decoration: none;
+}
+
+#fkurs{
+    padding: 20px;
+    background-color: #c7dbf9;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+#fkurs table{
+    margin-top: 10%;
+    margin-bottom: 10%;
+    text-align: center;
+    width: 100%;
+}
+
+#fkurs td{
+    font-family: Rouge Script, cursive;
+    font-size: 25px;
+    color: purple;
+    width: 33.3%;   
+}
+
+#fimage img{
+    text-align: center;
+    width: 30%;
+    height: auto;
+}
+
+#tgambar{
+    text-align: center;
+}
+
+#fvalid{
+    padding: 20px;
+    background-color: #c7dbf9;
+    border: 2px solid black;
+    border-radius: 15px;
+}
+
+#fvalid input[type="text"], input[type="email"], input[type="time"], input[type="number"]{
+    width: 100%;
+    padding: 10px;
+    display: inline-block;
+    border: 2px solid #ccc;
+    box-sizing: border-box; 
+    margin-top: 10px;
+    margin-bottom: 10px;    
+}
+
+#fvalid input[type=submit]{
+    background-color: #FE980F;
+    padding: 14px 20px;
+    width: 100%;    
+    margin-top: 10px;
+    margin-bottom: 10px;    
+    text-align: center;
+    color: white;
+}
+
+#fvalid span{
+    color: red;
+}
+
+#fhasil{    
+    margin-top: 20px;    
+    padding: 20px;
+    background-color: #c7dbf9;
+    border: 2px solid black;
+    border-radius: 15px;    
+}
+
+#fhasil table{
+    width: 100%;
+}
+
+#fhasil .td1{
+    width: 45%;    
+}
+
+#fhasil .td2{
+    width: 5%;
+}
+
+#fhasil b{
+    margin-left: 50%;
+    font-size: 25px;
+}
+
+.hasil{
+    font-family: Rouge Script, cursive;
+    font-size: 25px;
+    font-weight: bold;
+    color: green;
+}
