@@ -1,0 +1,19 @@
+1. Bagaimana menggunakan perintah tail untuk manampilkan pesan log terkini ?
+
+2. Apakah perlu sebuah metode mengefisienkan ruang penyimpanan ? Jika Ya Kenapa ? Jika Tidak Kenapa ?
+
+3. Apa yang dimaksud rotasi log ?
+
+4. Kenapa perlu partisi saat install ?
+
+5. Sebutkan jenis partisi !
+
+6. Apa itu filesystem ? dan sebutkan 3 aspeknya !
+
+7. Apa itu raid dan sebutkan 3 tekniknya
+
+8. LDAP adalah ? bagaimana teknisnya ?
+
+9. Apa itu SHELL ? apa kegunaannya ?
+
+10. Jelaskan perbedaan global variabel dan local variabel pada shell programming !
