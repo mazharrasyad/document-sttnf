@@ -1,4 +1,5 @@
--- Function Pertemuan 1
+-- Create Function
+
 create function salam()
 returns text as
 $$
@@ -10,7 +11,11 @@ $$
 	end
 $$ language plpgsql
 
+-- Run Function
+
 select salam();
+
+-- Function with Parameter
 
 create or replace function hello(text)
 returns text as
@@ -24,7 +29,11 @@ $$
 	end
 $$ language plpgsql
 
+-- Run Function
+
 select hello('Azhar');
+
+-- Create or Replace Function
 
 create or replace function
 luasSegitiga(real, real) returns real
@@ -38,7 +47,11 @@ $$
 	end
 $$ language plpgsql
 
+-- Run Function
+
 select luasSegitiga(4,7);
+
+-- Tugas
 
 -- 1. Buat fungsi untuk menghitung jumlah dua bilangan 
 
@@ -109,6 +122,8 @@ $$
 	end
 $$ language plpgsql;
 
+-- Run Function Condition
+
 select kelulusan('011011', 'NF001');
 select kelulusan('012012', 'NF001');
 
@@ -157,10 +172,12 @@ $$
 	end
 $$ language plpgsql;
 
+-- Run Function Update Table
+
 select grade('011011','NF001');
 select grade('012012','NF001');
 
--- Function Trigger Insert
+-- Function Insert Log
 
 create or replace function
 tambah_mhs_log() returns trigger as
@@ -173,16 +190,22 @@ $$
 	end
 $$ language plpgsql;
 
+-- Trigger Insert Log
+
 create trigger trig_log_input_mhs after
 insert on mahasiswa for each row
 execute procedure tambah_mhs_log();
 
-select * from mahasiswa;
-select * from log_table;
+-- Run Trigger
 
 insert into mahasiswa(id,nama) values (default,'Ihsanul Fikri');
 
--- Function After Update
+-- Display Table
+
+select * from mahasiswa;
+select * from log_table;
+
+-- Function Update Log
 
 create or replace function
 update_mhs_log() returns trigger as
@@ -195,45 +218,22 @@ $$
 	end
 $$ language plpgsql;
 
+-- Trigger Update Log
+
 create trigger trig_log_update_mhs after
 update on mahasiswa for each row
 execute procedure update_mhs_log();
 
+-- Run Trigger
+
 update mahasiswa set nama='Ihsanul Fikri Abiyyu' where id=1;
+
+-- Display Table
 
 select * from mahasiswa;
 select * from log_table;
 
 -- Function Update Grade
-
-select * from nilai_ujian;
-
-create or replace function
-update_mhs_grade_log() returns trigger as
-$$
-	begin
-		insert into log_table (nama_table, aksi, isi) 
-		values('nilai_ujian', 'UPDATE', old.nim || ' - ' || old.kodemk || ' - ' || old.total_nilai || ' - ' || old.grade);
-	
-		return old;
-	end
-$$ language plpgsql;
-
--- Function trigger Grade
-
-create trigger trig_log_update_mhs_grade after
-update on nilai_ujian for each row
-execute procedure update_mhs_grade_log();
-
--- Drop Trigger
-drop trigger trig_log_update_mhs_grade on nilai_ujian;
-
-update nilai_ujian set grade='A-' where id=1;
-
-select * from nilai_ujian;
-select * from log_table;
-
--- Otomatis Trigger
 
 create or replace function
 update_mhs_grade() returns trigger as
@@ -277,14 +277,14 @@ $$
 	end
 $$ language plpgsql;
 
--- Trigger
+-- Trigger Update Grade
+
 create trigger trig_update_mhs_grade after
 insert on nilai_ujian for each row
 execute procedure update_mhs_grade();
 
-drop trigger trig_update_grade_mhs on nilai_ujian;
+-- Run Trigger
 
--- Test trigger
 insert into nilai_ujian(id, kodemk, nim, total_nilai)
 values(3,'NF002','013013',0);
 
@@ -295,96 +295,9 @@ delete from nilai_ujian where id=3;
 
 select * from nilai_ujian;
 
--- TUGAS dbmart
-
-select * from customer;
-select * from products;
-select * from orders;
-select * from order_details;
-
--- 1. Buat fungsi update_stock_product(id_product, jumlah_stock) 
--- untuk meng-update data product yang stock nya kurang dari 20.
-
-create or replace function
-update_stock_product(int, int) returns int as
-$$
-	declare
-		id_product alias for $1;
-		jumlah_stock alias for $2;
-		v_stock int;
-	begin
-		select into v_stock stock from products where id = id_product;
-		
-		if v_stock < 20 then
-		
-			v_stock = v_stock + jumlah_stock;
-		
-			if 20 < v_stock then
-				update products set stock = stock + jumlah_stock where id = id_product;
-				return v_stock;
-			else
-				raise exception 'Jumlah Stock Masih Kurang Dari 20';
-			end if;
-		else
-			raise exception 'Stock Anda Tidak Kurang Dari 20';
-		end if;
-	end
-$$ language plpgsql;
-
-select * from products;
-select update_stock_product(1,6);
-
--- 2. Buat trigger pada tabel order_details untuk mengurangi stock pada products. 
--- Trigger dieksekusi sebelum insert data dengan terlebih dahulu mengecek stock product. 
--- jika stock kurang dari quantity_order maka harus di update stock terlebih dahulu.
-
--- Menghitung Stock
-
-create or replace function beli_product() returns trigger as
-$$
-	declare
-		v_stock int;
-	begin
-		select into v_stock stock from products where id = new.products_id;
-		
-		if new.quantity_order <= v_stock then
-			update products set stock = stock - new.quantity_order
-			where id = new.products_id;
-		
-			return new;
-		else
-			raise exception 'Stock Tidak Mencukupi Maka Stock Perlu Diupdate';
-		end if;	
-	end
-$$ language plpgsql;
-
-create trigger trig_beli_product before
-insert on order_details for each row
-execute procedure beli_product();
-
--- Menghitung price_each
-
-create or replace function update_product() returns trigger as
-$$
-	declare
-		v_price double precision;
-	begin
-		select into v_price price from products where id = new.products_id;
-				
-		update order_details set price_each = new.quantity_order * v_price
-		where orders_id = new.orders_id and products_id = new.products_id;
-	
-		return new;
-	end
-$$ language plpgsql;
-
-create trigger trig_update_product after
-insert on order_details for each row
-execute procedure update_product();
-
 -- Latihan dbmart
 
--- 1. Fungsi update stok
+-- 1. Function Update Stok
 
 create or replace function 
 update_stock_product(int, int)
@@ -411,6 +324,8 @@ $$
 	end
 $$ language plpgsql;
 
+-- Run Function Update Stok
+
 select * from products;
 select update_stock_product(2,10); -- Verifikasi
 select update_stock_product(1,1);
@@ -418,6 +333,8 @@ select update_stock_product(1,1);
 update products set stock = 10 where id = 1;
 
 -- 2. Trigger untuk mengurangi stock ketik ada data baru pada order_details
+
+-- Function Kurangi Stok
 
 create or replace function
 kurangi_stock() returns trigger as
@@ -445,9 +362,13 @@ $$
 	end
 $$ language plpgsql;
 
+-- Trigger Kurangi Stok
+
 create trigger trig_kurangi_stock before
 insert on order_details for each row
 execute procedure kurangi_stock();
+
+-- Run Trigger
 
 select * from products;
 
@@ -458,4 +379,147 @@ insert into order_details (orders_id, products_id, quantity_order) values
 (1,2,1);
 select * from order_details;
 
-drop trigger trig_beli_product on order_details;
+-- Transaction
+
+create table jenis_produk(
+id int primary key,
+nama varchar(45)
+);
+
+begin;
+insert into jenis_produk values (10,'Assesoris');
+insert into jenis_produk values (11,'Komputer');
+select * from jenis_produk;
+rollback;
+
+select * from jenis_produk;
+
+begin;
+insert into jenis_produk values (12,'Makanan');
+insert into jenis_produk values (13,'Minuman');
+select * from jenis_produk;
+commit;
+
+select * from jenis_produk;
+
+begin;
+delete from jenis_produk where id = 12;
+select * from jenis_produk;
+savepoint sp1;
+delete from jenis_produk where id = 13;
+select * from jenis_produk;
+rollback to savepoint sp1;
+select * from jenis_produk;
+commit;
+
+select * from jenis_produk;
+
+-- Latihan Transaction
+
+-- 1. Buat table produk
+
+create table produk(
+id int primary key,
+nama varchar(50),
+stok int
+);
+
+-- 2. Jalankan sebuah transaction, lakukan
+-- perintah DML (insert ke dalam table
+-- produk sebanyak 3 data)
+begin;
+insert into produk values
+(1,'Mobil',10),
+(2,'Motor',20),
+(3,'Sepeda',30);
+select * from produk;
+
+-- 3. Buat savepoint sp1
+savepoint sp1;
+
+-- 4. Lakukan perintah delete untuk 1 data
+delete from produk where id = 1;
+select * from produk;
+
+-- 5. Lakukan rollback ke save point sp1
+rollback to savepoint sp1;
+select * from produk;
+
+-- 6. Akhiri transaction dengan commit
+commit;
+
+select * from produk;
+
+-- Latihan Transaction 2
+-- ERD dbmart
+-- Soal Cerita
+-- 	Ayu adalah seorang kasir pada sebuah supermarket yang bertugas 
+-- meng-entry data master maupun data transaksi
+-- 	Ayu sedang melakukan proses query insert data ke tabel products
+-- sebanyak 5 data/record. Setelah itu ada customer datang ingin
+-- melakukan pembelian 2 produk masing-masing sebayak satu buah
+-- 	Setelah data pembelian di-entry oleh Ayu, ternyata customer
+-- tersebut membatalkan pembelian karena dompetnya tertinggal di rumah.
+-- Karena pembelian batal, Ayu ingin kembali ke kondisi
+-- setelah data produk di-entry
+-- 	Buatlah rangkaian proses-proses tersebut ke dalam sebuah proses
+-- transaction
+
+-- Ringkasan
+-- 1. insert data ke tabel products sebanyak 5 data/record
+-- 2. customer melakukan pembelian 2 produk masing-masing sebayak satu buah
+-- 3. data pembelian di-entry
+-- 4. customer membatalkan maka kembali ke kondisi setelah data produk di-entry
+
+-- Versi Azhar
+begin;
+select * from products;
+-- 1. insert data ke tabel products sebanyak 5 data/record
+insert into products values
+(4,'Roti C','Rasa Coklat',10,1000),
+(5,'Roti S','Rasa Stroberi',20,2000),
+(6,'Roti K','Rasa Keju',30,3000),
+(7,'Roti D','Rasa Durian',40,4000),
+(8,'Roti B','Rasa Blueberry',50,5000);
+select * from products;
+savepoint sp1;
+-- 2. customer melakukan pembelian 2 produk masing-masing sebayak satu buah
+select * from customer;
+-- 3. data pembelian di-entry
+select * from orders;
+insert into orders values
+(4,current_date, 1);
+select * from orders;
+select * from order_details;
+insert into order_details (orders_id, products_id, quantity_order) values
+(4,4,1),
+(4,5,1);
+select * from order_details;
+select * from products;
+savepoint sp2;
+-- 4. customer membatalkan maka kembali ke kondisi setelah data produk di-entry
+rollback to savepoint sp1;
+select * from products;
+select * from orders;
+select * from order_details;
+-- commit;
+-- rollback;
+
+-- Versi P Edo
+begin;
+insert into products values
+(default,'Product A','Makanan',100,13000),
+(default,'Product B','Makanan',80,9000),
+(default,'Product C','Minuman',140,25000),
+(default,'Product D','Minuman',300,3000),
+(default,'Product E','Makanan',30,11000);
+savepoint sp1;
+insert into orders values(default,'2018-11-29',1);
+select * from orders;
+insert into order_details values
+(6,3,1,null),
+(6,4,1,null);
+rollback to savepoint sp1;
+commit;
+select * from orders;
+select * from products;
