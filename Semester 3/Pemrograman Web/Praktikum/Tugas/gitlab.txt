@@ -1,0 +1,27 @@
+Buka terminal
+
+sudo su -
+
+cd /var/www/html/webpro
+
+git clone -b master https://gitlab.com/web-ti01-sttnf-20181/praktikum03.git
+
+git clone -b azhar_0110217029 https://gitlab.com/web-ti01-sttnf-20181/praktikum03.git
+
+chmod 777 -R praktikum03
+
+cd praktikum03
+
+git checkout -b ti01_azhar_0110217029_css
+
+Isi file yang mau di push di folder praktikum03
+
+git add .
+
+git commit -m "CSS"
+
+Kalau error
+git config --global user.name "mazharrasyad"
+git config --global user.email "muhazharrasyad@gmail.com"
+
+git push -u origin ti01_azhar_0110217029_css
